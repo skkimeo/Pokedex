@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @StateObject var homeData = HomeViewModel()
+    
     var body: some View {
         TabView {
             Text("this is the Favorites View")
@@ -16,11 +19,13 @@ struct HomeView: View {
                     Text("My Pokemons")
                 }
             
-            Text("this is the Search View")
+            SearchView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
+                .environmentObject(homeData)
+                .padding()
         }
     }
 }
