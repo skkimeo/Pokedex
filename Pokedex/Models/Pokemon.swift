@@ -16,13 +16,13 @@ struct Pokemons: Codable {
 struct Pokemon: Identifiable, Codable {
     let id: Int
     let name: String
-    let imgUrl: String
+//    let imgUrl: String
 //    let types: [String]
 //    let height: Int
 //    let weight: Int
     
     enum codingKeys: String, CodingKey {
         case id, name
-        case imgUrl = "sprites"
+//        case imgUrl = "sprites"
     }
 }

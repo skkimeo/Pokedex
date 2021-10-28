@@ -14,7 +14,8 @@ class HomeViewModel: ObservableObject {
     @Published var state: ResultState = .loading
     
     // make this @Published if doesn't update
-    private(set) var pokemons = [Pokemon]()
+    @Published private(set) var pokemons = [PokemonViewModel]()
+    private let imageLoader = ImageLoader()
     
     var searchCancellable: AnyCancellable? = nil
     
@@ -42,13 +43,15 @@ class HomeViewModel: ObservableObject {
     }
     
     func searchPokemons() {
+        pokemons = []
+        imageLoader.reset()
         
         let url = "https://pokeapi.co/api/v2/pokemon/\(searchQuery)"
         print(URL(string: url)!)
         
         URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
             if let error = error {
-                print("error")
+                print(error.localizedDescription)
                 return
             }
             
@@ -59,9 +62,10 @@ class HomeViewModel: ObservableObject {
             
             do {
                 let pokemons = try JSONDecoder().decode(Pokemon.self, from: APIdata)
+                print(pokemons.name)
                 DispatchQueue.main.async {
                     if self.pokemons.isEmpty {
-                        self.pokemons = [pokemons]
+                        self.appendPokemonViewModel(for: pokemons)
                     }
                 }
                 print("success")
@@ -71,5 +75,21 @@ class HomeViewModel: ObservableObject {
             
         }
         .resume()
+    }
+    
+    private func appendPokemonViewModel(for pokemon: Pokemon) {
+        let pokemonViewModel = PokemonViewModel(pokemon: pokemon)
+        DispatchQueue.main.async {
+            self.pokemons.append(pokemonViewModel)
+        }
+        
+        imageLoader.loadImage(for: pokemon) { image in
+            DispatchQueue.main.async {
+                pokemonViewModel.image = image
+            }
+            
+        }
+        print(pokemonViewModel.id)
+        
     }
 }

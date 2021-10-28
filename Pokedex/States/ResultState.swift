@@ -11,6 +11,6 @@ import Foundation
 // will change UI according to this state
 enum ResultState {
     case loading
-    case success(content: [Pokemon])
+    case success(content: [PokemonViewModel])
     case failed(error: Error)
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 class PokemonViewModel: ObservableObject, Identifiable {
+//    let id = UUID()
     let id: Int
     let name: String
     
@@ -16,6 +17,7 @@ class PokemonViewModel: ObservableObject, Identifiable {
     
     init(pokemon: Pokemon) {
         self.id = pokemon.id
+//        print(self.pokeId)
         self.name = pokemon.name
     }
     

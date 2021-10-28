@@ -12,8 +12,12 @@ struct SearchView: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-             searchBarBody
-            // searchResultsView
+            searchBarBody
+            ForEach(homeData.pokemons) { pokemon in
+                SearchRowView(pokemonData: pokemon)
+//                Text(pokemon.pokeId)
+                
+            }
             
         }
     }
