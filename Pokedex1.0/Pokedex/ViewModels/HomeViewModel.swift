@@ -58,7 +58,8 @@ class HomeViewModel: ObservableObject {
                 print("No Data Found")
                 return
             }
-            
+            print(APIdata.first!)
+            print(APIdata.last!)
             do {
                 let pokemons = try JSONDecoder().decode(Pokemon.self, from: APIdata)
                 print(pokemons.name)
