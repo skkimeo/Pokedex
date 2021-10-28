@@ -40,4 +40,36 @@ class HomeViewModel: ObservableObject {
                 }
             }
     }
+    
+    func searchPokemons() {
+        
+        let url = "https://pokeapi.co/api/v2/pokemon/\(searchQuery)"
+        print(URL(string: url)!)
+        
+        URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
+            if let error = error {
+                print("error")
+                return
+            }
+            
+            guard let APIdata = data else {
+                print("No Data Found")
+                return
+            }
+            
+            do {
+                let pokemons = try JSONDecoder().decode(Pokemon.self, from: APIdata)
+                DispatchQueue.main.async {
+                    if self.pokemons.isEmpty {
+                        self.pokemons = [pokemons]
+                    }
+                }
+                print("success")
+            } catch {
+                print("decoding error")
+            }
+            
+        }
+        .resume()
+    }
 }
