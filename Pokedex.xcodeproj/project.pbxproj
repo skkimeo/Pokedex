@@ -15,6 +15,7 @@
 		A49C71BF272AA5A7001D4D01 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C71BE272AA5A7001D4D01 /* HomeView.swift */; };
 		A49C71C1272AA768001D4D01 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C71C0272AA768001D4D01 /* SearchView.swift */; };
 		A49C71C4272AA897001D4D01 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C71C3272AA897001D4D01 /* HomeViewModel.swift */; };
+		A49C71C8272AAC6E001D4D01 /* ResultState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C71C7272AAC6E001D4D01 /* ResultState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		A49C71BE272AA5A7001D4D01 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A49C71C0272AA768001D4D01 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A49C71C3272AA897001D4D01 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		A49C71C7272AAC6E001D4D01 /* ResultState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		A49C71AB272A97E2001D4D01 /* Pokedex */ = {
 			isa = PBXGroup;
 			children = (
+				A49C71C6272AAC5E001D4D01 /* States */,
 				A49C71C2272AA884001D4D01 /* ViewModels */,
 				A49C71BD272AA588001D4D01 /* Views */,
 				A49C71BA272A986D001D4D01 /* Models */,
@@ -101,6 +104,14 @@
 				A49C71C3272AA897001D4D01 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A49C71C6272AAC5E001D4D01 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				A49C71C7272AAC6E001D4D01 /* ResultState.swift */,
+			);
+			path = States;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +187,7 @@
 				A49C71C4272AA897001D4D01 /* HomeViewModel.swift in Sources */,
 				A49C71C1272AA768001D4D01 /* SearchView.swift in Sources */,
 				A49C71AF272A97E2001D4D01 /* ContentView.swift in Sources */,
+				A49C71C8272AAC6E001D4D01 /* ResultState.swift in Sources */,
 				A49C71BF272AA5A7001D4D01 /* HomeView.swift in Sources */,
 				A49C71AD272A97E2001D4D01 /* PokedexApp.swift in Sources */,
 				A49C71BC272A9882001D4D01 /* Pokemon.swift in Sources */,

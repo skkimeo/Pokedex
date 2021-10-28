@@ -9,4 +9,19 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     @Published var searchQuery = ""
+    
+    var searchCancellable: AnyCancellable? = nil
+    
+    
+    init() {
+        searchCancellable = $searchQuery
+            .removeDuplicates()
+            .decode(type: 0.7, decoder: RunLoop.main)
+            .sink { result in
+                switch result {
+                    case
+                }
+                
+            }
+    }
 }
