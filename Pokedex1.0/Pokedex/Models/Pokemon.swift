@@ -20,6 +20,7 @@ struct Pokemon: Identifiable, Codable {
 //    let types: [String]
 //    let height: Int
 //    let weight: Int
+//    let types = [Int: [Str]]
     
     enum codingKeys: String, CodingKey {
         case id, name
