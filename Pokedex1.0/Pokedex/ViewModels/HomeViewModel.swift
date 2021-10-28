@@ -41,13 +41,12 @@ class HomeViewModel: ObservableObject {
                 }
             }
     }
-    
+
     func searchPokemons() {
         pokemons = []
         imageLoader.reset()
         
         let url = "https://pokeapi.co/api/v2/pokemon/\(searchQuery)"
-        print(URL(string: url)!)
         
         URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
             if let error = error {
