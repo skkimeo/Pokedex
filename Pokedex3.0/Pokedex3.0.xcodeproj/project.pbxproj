@@ -22,6 +22,8 @@
 		A4FA5651272BFD95007A567B /* SearchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA5650272BFD95007A567B /* SearchRowView.swift */; };
 		A4FA5653272BFDA0007A567B /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA5652272BFDA0007A567B /* SearchBarView.swift */; };
 		A4FA5655272BFDAA007A567B /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA5654272BFDAA007A567B /* ProfileImageView.swift */; };
+		A4FA5659272C0889007A567B /* Stash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4FA5657272C0889007A567B /* Stash.xcdatamodeld */; };
+		A4FA565B272C09F7007A567B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA565A272C09F7007A567B /* PersistenceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		A4FA5650272BFD95007A567B /* SearchRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRowView.swift; sourceTree = "<group>"; };
 		A4FA5652272BFDA0007A567B /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		A4FA5654272BFDAA007A567B /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		A4FA5658272C0889007A567B /* Stash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stash.xcdatamodel; sourceTree = "<group>"; };
+		A4FA565A272C09F7007A567B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 		A4FA562C272BFBB8007A567B /* Pokedex3.0 */ = {
 			isa = PBXGroup;
 			children = (
+				A4FA5656272C0872007A567B /* CoreData */,
 				A4FA5649272BFD54007A567B /* Views */,
 				A4FA5640272BFCA6007A567B /* ViewModels */,
 				A4FA563B272BFBC3007A567B /* Models */,
@@ -122,6 +127,15 @@
 				A4FA5654272BFDAA007A567B /* ProfileImageView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A4FA5656272C0872007A567B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A4FA5657272C0889007A567B /* Stash.xcdatamodeld */,
+				A4FA565A272C09F7007A567B /* PersistenceController.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4FA5630272BFBB8007A567B /* ContentView.swift in Sources */,
+				A4FA5659272C0889007A567B /* Stash.xcdatamodeld in Sources */,
 				A4FA564D272BFD70007A567B /* SearchView.swift in Sources */,
 				A4FA5648272BFCFE007A567B /* SearchViewModel.swift in Sources */,
 				A4FA5644272BFCD7007A567B /* PokemonViewModel.swift in Sources */,
@@ -202,6 +217,7 @@
 				A4FA5653272BFDA0007A567B /* SearchBarView.swift in Sources */,
 				A4FA5646272BFCED007A567B /* ImageLoader.swift in Sources */,
 				A4FA563F272BFBF8007A567B /* Service.swift in Sources */,
+				A4FA565B272C09F7007A567B /* PersistenceController.swift in Sources */,
 				A4FA564F272BFD8A007A567B /* MyPoketView.swift in Sources */,
 				A4FA562E272BFBB8007A567B /* Pokedex3_0App.swift in Sources */,
 				A4FA563D272BFBD5007A567B /* Pokemon.swift in Sources */,
@@ -411,6 +427,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A4FA5657272C0889007A567B /* Stash.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A4FA5658272C0889007A567B /* Stash.xcdatamodel */,
+			);
+			currentVersion = A4FA5658272C0889007A567B /* Stash.xcdatamodel */;
+			path = Stash.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A4FA5622272BFBB8007A567B /* Project object */;
 }
