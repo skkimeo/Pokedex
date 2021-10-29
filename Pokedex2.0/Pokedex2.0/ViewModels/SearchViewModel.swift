@@ -12,13 +12,26 @@ import Combine
 // publish searchQuery
 // and update [PokemonViewModel] accordingly
 class SearchViewModel: ObservableObject {
+    var num = 0
     @Published var searchQuery = ""
     // CHANGE THIS TO AN OPTIONAL TO IMPLEMENT PROGRESSVIEW
     // for searchView
     @Published public private(set) var pokemons = [PokemonViewModel]()
     
     // for poketView
-    @Published var myPokemons: [PokemonViewModel]?
+    @Published var myPokemons: [PokemonViewModel]? {
+        didSet {
+            if myPokemons != oldValue {
+                num += 1
+                print("updated my Poket: \(String(num))")
+                saveMyPokemons()
+            }
+        }
+    }
+    
+//    @Published var savedPokemons: [Pokemon]?
+    
+    private let myKey = "myKey"
     
     private let service = Service()
     private var disposables = Set<AnyCancellable>()
@@ -26,6 +39,8 @@ class SearchViewModel: ObservableObject {
     
     // make searchQuery observable and fetch data in accordance
     init() {
+        fetchMyPokemons()
+        
         $searchQuery
             .removeDuplicates()
             .debounce(for: 0.7, scheduler: RunLoop.main)
@@ -70,11 +85,35 @@ class SearchViewModel: ObservableObject {
     
     // MARK: - Storing and Fetching Saved Data
     private func saveMyPokemons() {
-        // save..
+        var savedPokemons: [Pokemon]?
+
+        if let myPokemons = myPokemons, !myPokemons.isEmpty {
+        // should i just mske savedPokemons empty instead...?
+        // would decoding crash..?
+            savedPokemons = []
+        myPokemons.forEach { savedPokemons!.append(Pokemon(name: $0.name, id: $0.id, height: $0.height, weight: $0.weight)) }
+        }
+        
+//        print(savedPokemons.count)
+//        if !savedPokemons.isEmpty {
+//        print(savedPokemons.first!.name)
+//        }
+        
+//        savedPokemons.forEach {print($0.name)}
+        if let encodedData = try? JSONEncoder().encode(savedPokemons) {
+            UserDefaults.standard.set(encodedData, forKey: myKey)
+        } else {
+            print("encoding error")
+        }
     }
     
     private func fetchMyPokemons() {
-        //
+        guard
+            let data = UserDefaults.standard.data(forKey: myKey),
+            let savedPokemons = try? JSONDecoder().decode([Pokemon].self, from: data)
+        else { return }
+        
+        savedPokemons.forEach { addToMyPoket(PokemonViewModel(pokemon: $0)) }
     }
     
     
@@ -91,7 +130,6 @@ class SearchViewModel: ObservableObject {
     }
     
     func deleteFromMyPoket(_ pokemon: PokemonViewModel) {
-        // 이러면 저장이 안될 것 같은 느낌...
         if myPokemons != nil {
             myPokemons?.remove(at: (myPokemons?.firstIndex(where: { $0.id == pokemon.id }))!)
         }
