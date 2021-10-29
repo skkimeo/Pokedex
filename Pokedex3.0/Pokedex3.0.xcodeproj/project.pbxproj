@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A4FA562E272BFBB8007A567B /* Pokedex3_0App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA562D272BFBB8007A567B /* Pokedex3_0App.swift */; };
-		A4FA5630272BFBB8007A567B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA562F272BFBB8007A567B /* ContentView.swift */; };
 		A4FA5632272BFBB9007A567B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4FA5631272BFBB9007A567B /* Assets.xcassets */; };
 		A4FA5635272BFBB9007A567B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4FA5634272BFBB9007A567B /* Preview Assets.xcassets */; };
 		A4FA563D272BFBD5007A567B /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA563C272BFBD5007A567B /* Pokemon.swift */; };
@@ -24,12 +23,12 @@
 		A4FA5655272BFDAA007A567B /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA5654272BFDAA007A567B /* ProfileImageView.swift */; };
 		A4FA5659272C0889007A567B /* Stash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4FA5657272C0889007A567B /* Stash.xcdatamodeld */; };
 		A4FA565B272C09F7007A567B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA565A272C09F7007A567B /* PersistenceController.swift */; };
+		A4FA5696272C3823007A567B /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA5695272C3823007A567B /* RowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A4FA562A272BFBB8007A567B /* Pokedex3.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokedex3.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4FA562D272BFBB8007A567B /* Pokedex3_0App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokedex3_0App.swift; sourceTree = "<group>"; };
-		A4FA562F272BFBB8007A567B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A4FA5631272BFBB9007A567B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4FA5634272BFBB9007A567B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A4FA563C272BFBD5007A567B /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
@@ -45,6 +44,7 @@
 		A4FA5654272BFDAA007A567B /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		A4FA5658272C0889007A567B /* Stash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stash.xcdatamodel; sourceTree = "<group>"; };
 		A4FA565A272C09F7007A567B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		A4FA5695272C3823007A567B /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,6 @@
 				A4FA5640272BFCA6007A567B /* ViewModels */,
 				A4FA563B272BFBC3007A567B /* Models */,
 				A4FA562D272BFBB8007A567B /* Pokedex3_0App.swift */,
-				A4FA562F272BFBB8007A567B /* ContentView.swift */,
 				A4FA5631272BFBB9007A567B /* Assets.xcassets */,
 				A4FA5633272BFBB9007A567B /* Preview Content */,
 			);
@@ -119,6 +118,7 @@
 		A4FA5649272BFD54007A567B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4FA5695272C3823007A567B /* RowView.swift */,
 				A4FA564A272BFD64007A567B /* PokedexView.swift */,
 				A4FA564C272BFD70007A567B /* SearchView.swift */,
 				A4FA564E272BFD8A007A567B /* MyPoketView.swift */,
@@ -208,8 +208,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4FA5630272BFBB8007A567B /* ContentView.swift in Sources */,
 				A4FA5659272C0889007A567B /* Stash.xcdatamodeld in Sources */,
+				A4FA5696272C3823007A567B /* RowView.swift in Sources */,
 				A4FA564D272BFD70007A567B /* SearchView.swift in Sources */,
 				A4FA5648272BFCFE007A567B /* SearchViewModel.swift in Sources */,
 				A4FA5644272BFCD7007A567B /* PokemonViewModel.swift in Sources */,

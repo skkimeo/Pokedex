@@ -6,10 +6,18 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SearchRowView: View {
     @EnvironmentObject var viewModel: SearchViewModel
     @ObservedObject var pokemon: PokemonViewModel
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @FetchRequest(
+        entity: PokemonEntity.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \PokemonEntity.name, ascending: true)]
+    ) var pokemonEntity: FetchedResults<PokemonEntity>
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
@@ -47,13 +55,54 @@ struct SearchRowView: View {
     
     var saveButton: some View {
         Button {
-            viewModel.toggleSaveStatus(of: pokemon)
+//            viewModel.toggleSaveStatus(of: pokemon)
+//            let pokemonEntity = pokemonEntity(context: managedObjectContext)
+//            pokemonEntity.name = pokemon.name
+//            pokemonEntity.
+            addPokemon()
         } label: {
             Image(systemName: pokemon.isSaved ? "star.fill" : "star")
                 .foregroundColor(.blue)
         }
         
     }
+    
+    private func addPokemon() {
+        withAnimation {
+            let newItem = PokemonEntity(context: managedObjectContext)
+            newItem.name = pokemon.name
+            newItem.pokeID = Int32(pokemon.id)
+            newItem.weight = Int32(pokemon.weight)
+            newItem.height = Int32(pokemon.height)
+            newItem.isSaved = true
+//            newItem.profileImage = pokemon.profileImage!.jpegData()
+
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+    
+    private func deletePokemon(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { pokemonEntity[$0] }.forEach(managedObjectContext.delete)
+
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+    
 }
 
 
@@ -70,6 +119,6 @@ struct SearchRowView: View {
 
 struct SearchRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        PokedexView()
     }
 }

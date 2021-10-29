@@ -1,5 +1,5 @@
 //
-//  MyPoketView.swift
+//  SearchRowView.swift
 //  Pokedex3.0
 //
 //  Created by sun on 2021/10/29.
@@ -8,8 +8,11 @@
 import SwiftUI
 import CoreData
 
-struct MyPoketView: View {
+struct RowView: View {
     @EnvironmentObject var viewModel: SearchViewModel
+//    @ObservedObject var pokemon: PokemonViewModel
+    static var poke: Pokemon
+    @ObservedObject var pokemon = PokemonViewModel(pokemon: poke)
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -19,37 +22,51 @@ struct MyPoketView: View {
     ) var pokemonEntity: FetchedResults<PokemonEntity>
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                if let myPokemons = viewModel.myPokemons {
-
-                    List {
-                        ForEach(pokemonEntity, id: \.self) { pokemon in
-//                            let pokemonModel = Pokemon(name: pokemon.name, id: pokemon.pokeID, height: pokemon.height, weight: pokemon.weight)
-                            var poke = PokemonViewModel(pokemon: Pokemon(name: pokemon.name!, id: Int(pokemon.pokeID), height: Int(pokemon.height), weight: Int(pokemon.weight)))
-                            poke.isSaved = pokemon.isSaved
-                            poke.profileImage = Image(systemName: "star")
-                            SearchRowView(pokemon: poke)
-                                .environmentObject(viewModel)
-                                .padding(.vertical)
-                        }
-                        .onDelete(perform: deletePokemon(offsets:))
-                    }
-                    .listStyle(.plain)
-                } else {
-                    VStack(spacing: 20) {
-                        Spacer()
-                        Image(systemName: "star")
-                            .font(.largeTitle)
-                            .foregroundColor(.blue)
-                        Text("Go Search Them All...!")
-                            .foregroundColor(.gray)
-                        Spacer()
+        HStack(alignment: .top, spacing: 15) {
+            ProfileImageView(image: pokemon.profileImage)
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Spacer()
+                HStack {
+                    Group {
+                        Text(String(pokemon.id))
+                            .foregroundColor(.purple)
+                            .fontWeight(.bold)
+                        Text(pokemon.name)
+                            .fontWeight(.bold)
+                        saveButton
                     }
                 }
+                Spacer()
+                HStack {
+                    Text("height: \(String(pokemon.height))")
+                    Text("weight: \(String(pokemon.weight))")
+                }
+                .font(.subheadline)
+                .multilineTextAlignment(.leading)
+                Spacer()
+                
             }
-            .navigationBarTitle("My Pokét!")
+            .padding(.vertical)
+            Spacer(minLength: 0)
+            
         }
+        .background(Color(.systemIndigo).opacity(0.15))
+        .cornerRadius(25)
+    }
+    
+    var saveButton: some View {
+        Button {
+//            viewModel.toggleSaveStatus(of: pokemon)
+//            let pokemonEntity = pokemonEntity(context: managedObjectContext)
+//            pokemonEntity.name = pokemon.name
+//            pokemonEntity.
+            addPokemon()
+        } label: {
+            Image(systemName: pokemon.isSaved ? "star.fill" : "star")
+                .foregroundColor(.blue)
+        }
+        
     }
     
     private func addPokemon() {
@@ -87,6 +104,7 @@ struct MyPoketView: View {
             }
         }
     }
+    
 }
 
 
@@ -101,9 +119,9 @@ struct MyPoketView: View {
 
 
 
-
-struct MyPoketView_Previews: PreviewProvider {
+struct SearchRowView_Previews: PreviewProvider {
     static var previews: some View {
         PokedexView()
     }
 }
+

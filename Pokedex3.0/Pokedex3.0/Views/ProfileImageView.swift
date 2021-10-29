@@ -46,6 +46,6 @@ struct ProfileImageView: View {
 
 struct profileImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        PokedexView()
     }
 }

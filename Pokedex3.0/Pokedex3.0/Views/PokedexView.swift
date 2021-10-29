@@ -6,8 +6,16 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct PokedexView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @FetchRequest(
+        entity: PokemonEntity.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \PokemonEntity.name, ascending: true)]
+    ) var pokemonEntity: FetchedResults<PokemonEntity>
+    
     @StateObject var viewModel = SearchViewModel()
     
     var body: some View {
@@ -17,6 +25,7 @@ struct PokedexView: View {
                     Image(systemName: "star")
                     Text("My Pokét")
                 }
+                
             
             SearchView()
                 .tabItem {
@@ -26,6 +35,8 @@ struct PokedexView: View {
         }
         .environmentObject(viewModel)
     }
+    
+    
 }
 
 
@@ -41,6 +52,6 @@ struct PokedexView: View {
 
 struct PokedexView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        PokedexView()
     }
 }

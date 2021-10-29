@@ -6,9 +6,17 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SearchView: View {
     @EnvironmentObject var viewModel: SearchViewModel
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @FetchRequest(
+        entity: PokemonEntity.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \PokemonEntity.name, ascending: true)]
+    ) var pokemonEntity: FetchedResults<PokemonEntity>
     
     var body: some View {
         NavigationView {
@@ -45,6 +53,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        PokedexView()
     }
 }
