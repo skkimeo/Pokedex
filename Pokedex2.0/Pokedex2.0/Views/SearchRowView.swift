@@ -24,9 +24,9 @@ struct SearchRowView: View {
                             .fontWeight(.bold)
                         Text(pokemon.name)
                             .fontWeight(.bold)
-                        Spacer()
+//                        Spacer()
                         saveButton
-                        Spacer()
+//                        Spacer()
                     }
 //                    .multilineTextAlignment(.leading)
                 }
@@ -46,11 +46,12 @@ struct SearchRowView: View {
         }
         .background(Color(.systemIndigo).opacity(0.15))
         .cornerRadius(25)
-        .padding(.horizontal)
+//        .padding(.horizontal)
     }
     
     var saveButton: some View {
-        Button {
+        
+            Button {
             viewModel.toggleSaveStatus(of: pokemon)
             // save to MyPoket
             // try to add toggle action?
@@ -59,6 +60,7 @@ struct SearchRowView: View {
             Image(systemName: pokemon.isSaved ? "star.fill" : "star")
                 .foregroundColor(.blue)
         }
+        
     }
 }
 

@@ -29,7 +29,7 @@ class SearchViewModel: ObservableObject {
         }
     }
     
-//    @Published var savedPokemons: [Pokemon]?
+    //    @Published var savedPokemons: [Pokemon]?
     
     private let myKey = "myKey"
     
@@ -39,12 +39,13 @@ class SearchViewModel: ObservableObject {
     
     // make searchQuery observable and fetch data in accordance
     init() {
+        print("being intiallized..")
         fetchMyPokemons()
         
         $searchQuery
             .removeDuplicates()
             .debounce(for: 0.7, scheduler: RunLoop.main)
-            // action to do on the fetched API data
+        // action to do on the fetched API data
             .sink(receiveValue: loadPokemons(of:))
             .store(in: &disposables)
     }
@@ -86,20 +87,20 @@ class SearchViewModel: ObservableObject {
     // MARK: - Storing and Fetching Saved Data
     private func saveMyPokemons() {
         var savedPokemons: [Pokemon]?
-
+        
         if let myPokemons = myPokemons, !myPokemons.isEmpty {
-        // should i just mske savedPokemons empty instead...?
-        // would decoding crash..?
+            // should i just mske savedPokemons empty instead...?
+            // would decoding crash..?
             savedPokemons = []
-        myPokemons.forEach { savedPokemons!.append(Pokemon(name: $0.name, id: $0.id, height: $0.height, weight: $0.weight)) }
+            myPokemons.forEach { savedPokemons!.append(Pokemon(name: $0.name, id: $0.id, height: $0.height, weight: $0.weight)) }
         }
         
-//        print(savedPokemons.count)
-//        if !savedPokemons.isEmpty {
-//        print(savedPokemons.first!.name)
-//        }
+        //        print(savedPokemons.count)
+        //        if !savedPokemons.isEmpty {
+        //        print(savedPokemons.first!.name)
+        //        }
         
-//        savedPokemons.forEach {print($0.name)}
+        //        savedPokemons.forEach {print($0.name)}
         if let encodedData = try? JSONEncoder().encode(savedPokemons) {
             UserDefaults.standard.set(encodedData, forKey: myKey)
         } else {
@@ -113,7 +114,20 @@ class SearchViewModel: ObservableObject {
             let savedPokemons = try? JSONDecoder().decode([Pokemon].self, from: data)
         else { return }
         
-        savedPokemons.forEach { addToMyPoket(PokemonViewModel(pokemon: $0)) }
+        for pokemon in savedPokemons {
+            let pokemonVM = PokemonViewModel(pokemon: pokemon)
+            
+            imageLoader.loadImage(for: pokemon) { image in
+                DispatchQueue.main.async {
+                    pokemonVM.profileImage = image
+                }
+            }
+            pokemonVM.isSaved = true
+            
+            addToMyPoket(pokemonVM)
+        }
+        
+//        savedPokemons.forEach { addToMyPoket(PokemonViewModel(pokemon: $0)) }
     }
     
     
@@ -132,11 +146,25 @@ class SearchViewModel: ObservableObject {
     func deleteFromMyPoket(_ pokemon: PokemonViewModel) {
         if myPokemons != nil {
             myPokemons?.remove(at: (myPokemons?.firstIndex(where: { $0.id == pokemon.id }))!)
+            
+            if myPokemons!.isEmpty {
+                myPokemons = nil
+            }
         }
     }
     
     func toggleSaveStatus(of pokemon: PokemonViewModel) {
         pokemon.isSaved.toggle()
         pokemon.isSaved ? addToMyPoket(pokemon) : deleteFromMyPoket(pokemon)
+    }
+    
+    func deleteInPoket(at index: IndexSet) {
+        let idx = myPokemons?.index(0, offsetBy: index.first!)
+        myPokemons![idx!].isSaved = false
+        myPokemons?.remove(atOffsets: index)
+        
+        if myPokemons!.isEmpty {
+            myPokemons = nil
+        }
     }
 }

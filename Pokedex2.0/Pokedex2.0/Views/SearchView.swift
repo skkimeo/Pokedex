@@ -13,7 +13,9 @@ struct SearchView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
+//            ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                List {
                 SearchBarView()
                     .padding()
                     .environmentObject(viewModel)
@@ -23,6 +25,8 @@ struct SearchView: View {
                     SearchRowView(pokemon: pokemon)
                         .environmentObject(viewModel)
                 }
+                }
+                .listStyle(.inset)
             }
             .navigationBarTitle("Find A Pokémon!")
         }

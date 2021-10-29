@@ -14,11 +14,16 @@ struct MyPoketView: View {
         NavigationView {
             Group {
                 if let myPokemons = viewModel.myPokemons {
-                    ScrollView(.vertical, showsIndicators: false) {
+//                    ScrollView(.vertical, showsIndicators: false) {
+                    List {
                         ForEach(myPokemons) { pokemon in
-                            Text(pokemon.name)
+                            SearchRowView(pokemon: pokemon)
+                                .environmentObject(viewModel)
+                                .padding(.vertical)
                         }
+                        .onDelete(perform: viewModel.deleteInPoket(at:))
                     }
+                    .listStyle(.plain)
                 } else {
                     VStack(spacing: 20) {
                         Spacer()
