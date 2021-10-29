@@ -1,6 +1,6 @@
 //
 //  SearchRowView.swift
-//  Pokedex2.0
+//  Pokedex3.0
 //
 //  Created by sun on 2021/10/29.
 //
@@ -24,11 +24,8 @@ struct SearchRowView: View {
                             .fontWeight(.bold)
                         Text(pokemon.name)
                             .fontWeight(.bold)
-//                        Spacer()
                         saveButton
-//                        Spacer()
                     }
-//                    .multilineTextAlignment(.leading)
                 }
                 Spacer()
                 HStack {
@@ -46,16 +43,11 @@ struct SearchRowView: View {
         }
         .background(Color(.systemIndigo).opacity(0.15))
         .cornerRadius(25)
-//        .padding(.horizontal)
     }
     
     var saveButton: some View {
-        
-            Button {
+        Button {
             viewModel.toggleSaveStatus(of: pokemon)
-            // save to MyPoket
-            // try to add toggle action?
-            // colored if isSaved... 
         } label: {
             Image(systemName: pokemon.isSaved ? "star.fill" : "star")
                 .foregroundColor(.blue)

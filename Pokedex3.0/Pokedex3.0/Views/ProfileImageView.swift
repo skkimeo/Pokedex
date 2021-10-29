@@ -1,13 +1,13 @@
 //
-//  profileImageView.swift
-//  Pokedex2.0
+//  ProfileImageView.swift
+//  Pokedex3.0
 //
 //  Created by sun on 2021/10/29.
 //
 
 import SwiftUI
 
-struct profileImageView: View {
+struct ProfileImageView: View {
     let image: Image?
     
     var body: some View {
