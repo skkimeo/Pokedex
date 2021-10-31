@@ -19,6 +19,8 @@ class SearchViewModel: ObservableObject {
     // for searchView
     @Published public private(set) var pokemons = [PokemonViewModel]()
     
+    @Published var loadingStatus = LoadingState.loading
+    
     // for poketView
     @Published var myPokemons: [PokemonViewModel]? {
         didSet {
@@ -58,10 +60,19 @@ class SearchViewModel: ObservableObject {
     // in this case, convert it into PokemonViewModel
     private func loadPokemons(of searchQuery: String) {
         // MAYBE ADD STH FOR WHEN THE SEARTQUERY is EMPTY?
+        loadingStatus = .loading
         pokemons.removeAll()
         imageLoader.reset()
         
         service.loadPokemons(searchTerm: searchQuery) { pokemons in
+            DispatchQueue.main.async {
+                
+            if pokemons.isEmpty {
+                self.loadingStatus = .loadingFailure
+            } else {
+                self.loadingStatus = .loadingSuccess
+            }
+            }
             pokemons.forEach { self.appendPokemonVM(of: $0) }
         }
     }

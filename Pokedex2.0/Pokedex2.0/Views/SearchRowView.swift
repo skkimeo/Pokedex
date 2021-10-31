@@ -76,10 +76,10 @@ struct SearchRowView: View {
         //        } label: {
         withAnimation {
             ZStack {
-                Image(systemName: "star")
-                    .foregroundColor(.blue)
+                Image(systemName: "heart")
+                    .foregroundColor(.pink)
                 if pokemon.isSaved {
-                    Image("star.fill")
+                    Image(systemName: "heart.fill")
                         .foregroundColor(.pink)
                         .transition(AnyTransition.asymmetric(insertion: .scale, removal: .scale))
                         .scaleEffect()

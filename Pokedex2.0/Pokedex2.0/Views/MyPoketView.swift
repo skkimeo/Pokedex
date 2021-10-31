@@ -14,7 +14,7 @@ struct MyPoketView: View {
         NavigationView {
             VStack {
                 if let myPokemons = viewModel.myPokemons {
-//                    ScrollView(.vertical, showsIndicators: false) {
+                    //                    ScrollView(.vertical, showsIndicators: false) {
                     List {
                         ForEach(myPokemons) { pokemon in
                             SearchRowView(pokemon: pokemon)
@@ -23,7 +23,7 @@ struct MyPoketView: View {
                         }
                         .onDelete { index in
                             withAnimation {
-                            viewModel.deleteInPoket(at: index)
+                                viewModel.deleteInPoket(at: index)
                             }
                         }
                     }
@@ -40,7 +40,7 @@ struct MyPoketView: View {
                     }
                 }
             }
-            .transition(.asymmetric(insertion: .opacity, removal: .opacity))
+            .transition(.asymmetric(insertion: .identity, removal: .opacity))
             .navigationBarTitle("My Pokét!")
         }
     }
