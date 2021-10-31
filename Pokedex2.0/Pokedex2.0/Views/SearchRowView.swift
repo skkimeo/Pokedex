@@ -12,6 +12,7 @@ struct SearchRowView: View {
     @ObservedObject var pokemon: PokemonViewModel
     
     var body: some View {
+        ZStack {
         HStack(alignment: .top, spacing: 15) {
             ProfileImageView(image: pokemon.profileImage)
             
@@ -24,11 +25,11 @@ struct SearchRowView: View {
                             .fontWeight(.bold)
                         Text(pokemon.name)
                             .fontWeight(.bold)
-//                        Spacer()
+                        //                        Spacer()
                         saveButton
-//                        Spacer()
+                        //                        Spacer()
                     }
-//                    .multilineTextAlignment(.leading)
+                    //                    .multilineTextAlignment(.leading)
                 }
                 Spacer()
                 HStack {
@@ -46,20 +47,50 @@ struct SearchRowView: View {
         }
         .background(Color(.systemIndigo).opacity(0.15))
         .cornerRadius(25)
-//        .padding(.horizontal)
+        .onTapGesture(count: 2){
+            withAnimation {
+                viewModel.toggleSaveStatus(of: pokemon)
+            }
+        }
+            heartButton
+                .opacity(pokemon.isSaved ? 1 : 0)
+        }
+        //        .padding(.horizontal)
+    }
+    
+    var heartButton: some View {
+        Image(systemName: "heart.fill")
+            .foregroundColor(.pink)
+            .font(.largeTitle)
+//            .scaleEffect()
+            .scaleEffect(pokemon.isSaved ? 0 : 1)
     }
     
     var saveButton: some View {
         
-            Button {
-            viewModel.toggleSaveStatus(of: pokemon)
-            // save to MyPoket
-            // try to add toggle action?
-            // colored if isSaved... 
-        } label: {
-            Image(systemName: pokemon.isSaved ? "star.fill" : "star")
-                .foregroundColor(.blue)
+        //        Button {
+        //            viewModel.toggleSaveStatus(of: pokemon)
+        //            // save to MyPoket
+        //            // try to add toggle action?
+        //            // colored if isSaved...
+        //        } label: {
+        withAnimation {
+            ZStack {
+                Image(systemName: "star")
+                    .foregroundColor(.blue)
+                if pokemon.isSaved {
+                    Image("star.fill")
+                        .foregroundColor(.pink)
+                        .transition(AnyTransition.asymmetric(insertion: .scale, removal: .scale))
+                        .scaleEffect()
+                }
+                //            Image(systemName: pokemon.isSaved ? "star.fill" : "star")
+                //                .foregroundColor(.blue)
+                //                .transition(AnyTransition.asymmetric(insertion: .scale, removal: .scale))
+            }
+            
         }
+        //        }
         
     }
 }

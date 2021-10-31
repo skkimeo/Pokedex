@@ -12,7 +12,7 @@ struct MyPoketView: View {
     
     var body: some View {
         NavigationView {
-            Group {
+            VStack {
                 if let myPokemons = viewModel.myPokemons {
 //                    ScrollView(.vertical, showsIndicators: false) {
                     List {
@@ -21,7 +21,11 @@ struct MyPoketView: View {
                                 .environmentObject(viewModel)
                                 .padding(.vertical)
                         }
-                        .onDelete(perform: viewModel.deleteInPoket(at:))
+                        .onDelete { index in
+                            withAnimation {
+                            viewModel.deleteInPoket(at: index)
+                            }
+                        }
                     }
                     .listStyle(.plain)
                 } else {
@@ -36,6 +40,7 @@ struct MyPoketView: View {
                     }
                 }
             }
+            .transition(.asymmetric(insertion: .opacity, removal: .opacity))
             .navigationBarTitle("My Pokét!")
         }
     }

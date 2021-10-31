@@ -6,18 +6,20 @@
 //
 
 import Foundation
+//import MBProgressHUD
+import SwiftUI
+import UIKit
 
 // sends request to fetch data from the API
 class Service {
     // fetch data -> modify via the completion handler
     private var dataTask: URLSessionDataTask?
     private var baseUrl = "https://pokeapi.co/api/v2/pokemon/"
-    
     // fetch pokemons from the api
     func loadPokemons(searchTerm: String, completion: @escaping ([Pokemon]) -> Void) {
         // cancel any running task
         dataTask?.cancel()
-        
+//        showLoadingHUD()
         // build URL based on searchTerm
         guard let url = buildURL(for: searchTerm) else {
             completion([])
@@ -41,6 +43,7 @@ class Service {
             print(APIdata.first!)
             
             // everything went fine so decode now!
+//            self.hideLoadingHUD()
             if (20...299).contains(response.statusCode) {
                 // change here if fetch fails
                 if let pokemonResponse = try? JSONDecoder().decode(Pokemon.self, from: APIdata) {
