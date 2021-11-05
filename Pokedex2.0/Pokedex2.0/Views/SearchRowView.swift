@@ -34,7 +34,9 @@ struct SearchRowView: View {
                 Spacer()
                 HStack {
                     Text("height: \(String(pokemon.height))")
+                        .font(Font.custom("pixelmix", size: 10))
                     Text("weight: \(String(pokemon.weight))")
+                        .font(Font.custom("pixelmix", size: 10))
                 }
                 .font(.subheadline)
                 .multilineTextAlignment(.leading)
@@ -52,8 +54,8 @@ struct SearchRowView: View {
                 viewModel.toggleSaveStatus(of: pokemon)
             }
         }
-            heartButton
-                .opacity(pokemon.isSaved ? 1 : 0)
+//            heartButton
+//                .opacity(dcpokemon.isSaved ? 1 : 0)
         }
         //        .padding(.horizontal)
     }

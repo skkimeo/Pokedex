@@ -42,8 +42,9 @@ struct SearchView: View {
                         case .loadingSuccess:
                             ForEach(viewModel.pokemons) { pokemon in
 //                                withAnimation {
-                                    SearchRowView(pokemon: pokemon)
-                                        .environmentObject(viewModel)
+//                                NavigationLink(destination: detailView(viewModel: viewModel, pokemon: pokemon)) {
+                                SearchRowView(pokemon: pokemon)
+//                                }
 //                                }
                             }
                         case .loadingFailure:
